@@ -29,6 +29,7 @@ class LoginView(APIView):
             response.update(**{"message": err.message, })
 
         except Exception as err:
+            print(err)
             http_code = HTTP_500_INTERNAL_SERVER_ERROR
             response.message = "Internal server error. Please contact support."
 
@@ -41,6 +42,10 @@ class SignUpView(APIView):
     def post(self, requset):
         response = view_helpers.APIViewErrorResponse()
         http_code = HTTP_400_BAD_REQUEST
+
+        # service = registration_services.SignUpService()
+        # data = service.reigster_customer(self.request.data)
+
 
         try:
             service = registration_services.SignUpService()
@@ -55,6 +60,7 @@ class SignUpView(APIView):
             response.update(**{"message": err.message})
 
         except Exception as err:
+            print(err)
             http_code = HTTP_500_INTERNAL_SERVER_ERROR
             response.message = "Internal server error. Please contact support."
 

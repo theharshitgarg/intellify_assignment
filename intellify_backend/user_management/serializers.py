@@ -2,7 +2,11 @@ from rest_framework import serializers
 
 from user_management.models import Customer
 from user_management.validators import name_validator, phone_validator, password_validator
-from user_management.exceptions import UsernameAlreadyExistsException
+from user_management.exceptions import (
+    UsernameAlreadyExistsException,
+    PhoneNumberAlreadyExistsException,
+    EmailAlreadyExistsException,
+)
 
 
 class CustomerSignUpSerialaizer(serializers.Serializer):
@@ -23,6 +27,22 @@ class CustomerSignUpSerialaizer(serializers.Serializer):
 
         if user.exists():
             raise UsernameAlreadyExistsException(value)
+
+        return value
+    
+    def validate_username(self, value):
+        customer = Customer.objects.filter(email=value)
+
+        if customer.exists():
+            raise EmailAlreadyExistsException(value)
+
+        return value
+
+    def validate_phone_number(self, value):
+        customer = Customer.objects.filter(phone_number=value)
+
+        if customer.exists():
+            raise PhoneNumberAlreadyExistsException(value)
 
         return value
 

@@ -1,9 +1,5 @@
 class CustomException(Exception):
-    def __init__(self, name, message):
-        self.name = name
-        self.message = message
-        super().__init__(self.message)
-
+    pass
 
 class InvalidNameException(CustomException):
     """Exception raised for errors in name fields.
@@ -60,3 +56,32 @@ class UsernameAlreadyExistsException(CustomException):
 
     def __str__(self):
         return f'{self.name} : {self.message}'
+
+
+class EmailAlreadyExistsException(CustomException):
+    """Exception raised for duplicate email.
+    """
+
+    def __init__(self, name, message="email is already taken."):
+        self.name = name
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f'{self.name} : {self.message}'
+
+
+class PhoneNumberAlreadyExistsException(CustomException):
+    """Exception raised for duplicate phone number.
+    """
+
+    def __init__(self, name, message="phone number is already taken."):
+        self.name = name
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        return f'{self.name} : {self.message}'
+
+
+
