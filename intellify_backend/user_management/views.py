@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK , HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK , HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 from rest_framework import permissions
 
 from user_management.services import registration_services
@@ -27,6 +27,10 @@ class LoginView(APIView):
         except CustomException as err:
             http_code = HTTP_400_BAD_REQUEST
             response.update(**{"message": err.message,})
+        
+        except Exception as err:
+            http_code = HTTP_500_INTERNAL_SERVER_ERROR
+            response.message = "Internal server error. Please contact support."
 
         return Response(response.json(), http_code)
 
@@ -49,5 +53,9 @@ class SignUpView(APIView):
         except CustomException as err:
             http_code = HTTP_400_BAD_REQUEST
             response.update(**{"message": err.message})
+        
+        except Exception as err:
+            http_code = HTTP_500_INTERNAL_SERVER_ERROR
+            response.message = "Internal server error. Please contact support."
 
         return Response(response.json(), http_code)
