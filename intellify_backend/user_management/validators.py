@@ -6,14 +6,15 @@ from user_management.exceptions import (
     InvalidPasswordLengthException,
 )
 
+
 def name_validator(value):
     try:
         if not value.isalpha():
-            raise InvalidNameException(value)    
-        
+            raise InvalidNameException(value)
+
         return value
-    
-    except:
+
+    except BaseException:
         raise InvalidNameException(value)
 
 
@@ -21,14 +22,14 @@ def phone_validator(value):
     try:
         if not value.isnumeric():
             raise InvalidPhoneException(value)
-        
+
         return value
-    
-    except:
+
+    except BaseException:
         raise InvalidPhoneException(value)
 
 
-def password_validator(value): 
+def password_validator(value):
     if len(value) < 8:
         raise InvalidPasswordLengthException(value)
 

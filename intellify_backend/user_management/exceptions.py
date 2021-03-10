@@ -19,7 +19,7 @@ class InvalidNameException(CustomException):
         super().__init__(self.message)
 
     def __str__(self):
-        return f'{self.name} -> {self.message}'
+        return f'{self.name} : {self.message}'
 
 
 class InvalidPhoneException(CustomException):
@@ -32,20 +32,21 @@ class InvalidPhoneException(CustomException):
         super().__init__(self.message)
 
     def __str__(self):
-        return f'{self.name} -> {self.message}' 
+        return f'{self.name} : {self.message}'
 
 
 class InvalidPasswordLengthException(CustomException):
     """Exception raised for errors in password field.
     """
 
-    def __init__(self, name, message="Password should have minimum 8 characters"):
+    def __init__(self, name,
+                 message="Password should have minimum 8 characters"):
         self.name = name
         self.message = message
         super().__init__(self.message)
 
     def __str__(self):
-        return f'{self.name} -> {self.message}' 
+        return f'{self.name} : {self.message}'
 
 
 class UsernameAlreadyExistsException(CustomException):
@@ -58,4 +59,4 @@ class UsernameAlreadyExistsException(CustomException):
         super().__init__(self.message)
 
     def __str__(self):
-        return f'{self.name} -> {self.message}'
+        return f'{self.name} : {self.message}'
