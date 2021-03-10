@@ -29,71 +29,55 @@ Make sure the that the ptython version is >=3.8.
 
 The following demonstrates setting up and working with a development environment:
 
-```
-$ make virtualenv
-
-$ source env/bin/activate
-
-```
+    ```
+    $ make virtualenv
+    $ source env/bin/activate
+    ```
 
 ### Intall dependencies
 
 To install the dependencies, run the following:
 
+    ```
+    $ pip install -r requirements.txt
+    ```
 
-```
-$ pip install -r requirements.txt
-```
-
-## Run 
+## Run
 
 This project includes a number of helpers in the `Makefile` to streamline common development tasks.
 
 Go to the project root directory and execute the command:
 
-```
-$ make run
-```
-Alternatively, you can try 
+    ```
+    $ make run
+    ```
 
-```
-$ docker-compose up
-```
+Alternatively, you can try
+
+    ```
+    $ docker-compose up
+    ```
 
 ## Examples
 
 To get the examples, you can try the following commands
 
-```
-$ make show_examples
-$ make show_success_examples
-$ make show_error_examples
-```
-
-Alternatively,
-
-```
-$ sh examples/test_api.sh
-$ sh examples/test_api_errors.sh
-```
+    ```
+    $ make show_examples
+    ```
 
 ## Testcases
 
 The command to test it as follows:
 
-```
-$ make test
-
-or
-
-$ python tvarit_backend/manage.py test tvarit_backend
-```
+    ```
+    $ make test
+    ```
 
 ## Docker
 
 Included is a basic `Dockerfile` for building and running the application, and can be built with the included `make` helper:
 
-```
-$ make docker
-```
-
+    ```
+    $ make docker
+    ```
