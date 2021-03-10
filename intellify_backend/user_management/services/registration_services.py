@@ -3,7 +3,8 @@ from user_management.serializers import (
     CustomerDetailsSerialaizer,
 )
 from user_management.models import Customer
-
+from user_management.exceptions import CustomException
+from rest_framework.exceptions import ValidationError as RestValidationError
 
 class SignUpService():
 
@@ -29,30 +30,26 @@ class SignUpService():
 class LogInService():
 
     def validate_data(self, data):
-        try:
-            serializer = CustomerLogInSerialaizer(data=data)
-            serializer.is_valid(raise_exception=True)
+        serializer = CustomerLogInSerialaizer(data=data)
+        serializer.is_valid(raise_exception=True)
 
-            return serializer.validated_data
-
-        except Exception as err:
-            print(err)
-            pass
+        return serializer.validated_data
 
     def login_customer(self, data):
-        validated_data = self.validate_data(data)
-        customer = Customer.objects.get(user__username=validated_data["username"])
+        try:
+            validated_data = self.validate_data(data)
+            customer = Customer.objects.get(user__username=validated_data["username"])
+            
+            is_valid = customer.user.check_password(validated_data["password"])
+            
+            if is_valid:
+                return CustomerDetailsSerialaizer(customer).data
         
-        is_valid = customer.user.check_password(validated_data["password"])
-        
-        if is_valid:
-            return CustomerDetailsSerialaizer(customer).data
-        
+        except KeyError:
+            raise CustomException("Invalid request")
+
+        except RestValidationError as err:
+            raise CustomException("data", "Invalid data")
+
         return False
-
-        
-
-        
-        
-        
 

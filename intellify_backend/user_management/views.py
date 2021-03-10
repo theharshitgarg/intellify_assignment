@@ -26,7 +26,7 @@ class LoginView(APIView):
 
         except CustomException as err:
             http_code = HTTP_400_BAD_REQUEST
-            response.update({"message": err.message,})
+            response.update(**{"message": err.message,})
 
         return Response(response.json(), http_code)
 
