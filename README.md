@@ -58,6 +58,12 @@ Alternatively, you can try
     $ docker-compose up
     ```
 
+Alternatively, you can try
+
+    ```
+    $ python intellify_backend/manage.py runserver 9000
+    ```
+
 ## Examples
 
 To get the examples, you can try the following commands
